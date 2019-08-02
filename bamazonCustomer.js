@@ -11,16 +11,15 @@ let connection = mysql.createConnection({
 
 connection.connect(function(err) {
     if (err) throw err;
-    /* displayProducts(); */
+    displayProducts(); 
     askUser();
-    connection.end(); 
   });
 
   function displayProducts(){
     connection.query("SELECT * FROM products",function(err,res){
         if (err) throw err;
         console.log(res);
-        connection.end(); 
+       
     });
   }
 
@@ -30,44 +29,41 @@ connection.connect(function(err) {
 
     inquirer.prompt([
         {
-        message: "Enter product ID you are interested in purchasing:",
-        name: "userID",
-        
+            message: "Enter product ID you are interested in purchasing:",
+            name: "userID",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                return true;
+                }
+                console.log(" "+"<<< this is not a number!!!")
+                return false;
+            }
         },
         {
-        message: "How many units of this would you like to purchase?",
-        name:"userUnits",
+            message: "How many units of this would you like to purchase?",
+            name:"userUnits",
+            validate: function(value) {
+                if (isNaN(value) === false) {
+                return true;
+                }
+                console.log(" "+"<<< this is not a number!!!")
+                return false;
+            }
         }
     ])
     .then(function(answer) {
-    console.log(typeof(answer.userID));
-    console.log(answer.userUnits);
+    let userInputID = (parseInt(answer.userID));
+    let userInputUnits = (parseInt(answer.userUnits));
+    checkInventory();
+
+    function checkInventory(){
+        connection.query("SELECT stock_quantity  FROM products WHERE item_id = "+ userInputUnits,function(err,res){
+            if (err) throw err;
+            console.log(res);
+            connection.end(); 
+        });
+      }
+
     });
   }
 
-/* 
-  .prompt([
-    {
-      name: "start",
-      type: "input",
-      message: "Enter starting position: ",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        return false;
-      }
-    },
-    {
-      name: "end",
-      type: "input",
-      message: "Enter ending position: ",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        return false;
-      }
-    }
-  ]) */
-  
