@@ -53,18 +53,34 @@ connection.connect(function(err) {
         }
     ])
     .then(function(answer) {
-    let userInputID = (answer.userID);
-    let userInputUnits = (answer.userUnits);
-    console.log(userInputID);
-    console.log(userInputUnits);
+    let userInputID = answer.userID;
+    let userInputUnits = parseInt(answer.userUnits);
     checkInventory();
 
     function checkInventory(){
         connection.query("SELECT stock_quantity FROM products WHERE item_id = "+ userInputID,function(err,res){
             if (err) throw err;
-            console.log(JSON.stringify(res[0].stock_quantity));
-            connection.end(); 
+
+            let currentStock = parseInt(JSON.stringify(res[0].stock_quantity));
+
+            if(userInputUnits > currentStock){
+                console.log("We are out of inventory! Come back another day! Currently only have: "+ currentStock + " "+ "units");
+            }
+            else{
+            connection.query("UPDATE products SET stock_quantity = "+(currentStock-userInputUnits)  + " " + "WHERE item_id = " + userInputID,function(err,res){
+                connection.query("SELECT price FROM products WHERE item_id = "+ userInputID,function(err,res){
+                    let price = parseInt(JSON.stringify(res[0].price));
+                    console.log("Total cost is: "+ userInputUnits * price);
+                    connection.end(); 
+                })
+                
+            })
+            }
+            
         });
+
+
+
       }
 
     });
