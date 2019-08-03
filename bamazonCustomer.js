@@ -12,13 +12,14 @@ let connection = mysql.createConnection({
 connection.connect(function(err) {
     if (err) throw err;
     displayProducts(); 
-    askUser();
+    
   });
 
   function displayProducts(){
     connection.query("SELECT * FROM products",function(err,res){
         if (err) throw err;
         console.log(res);
+        askUser();
        
     });
   }
@@ -52,12 +53,14 @@ connection.connect(function(err) {
         }
     ])
     .then(function(answer) {
-    let userInputID = (parseInt(answer.userID));
-    let userInputUnits = (parseInt(answer.userUnits));
+    let userInputID = (answer.userID);
+    let userInputUnits = (answer.userUnits);
+    console.log(userInputID);
+    console.log(userInputUnits);
     checkInventory();
 
     function checkInventory(){
-        connection.query("SELECT stock_quantity  FROM products WHERE item_id = "+ userInputUnits,function(err,res){
+        connection.query("SELECT stock_quantity  FROM products WHERE item_id = "+ userInputID,function(err,res){
             if (err) throw err;
             console.log(res);
             connection.end(); 
