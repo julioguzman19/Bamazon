@@ -62,7 +62,7 @@ connection.connect(function(err) {
     function checkInventory(){
         connection.query("SELECT stock_quantity FROM products WHERE item_id = "+ userInputID,function(err,res){
             if (err) throw err;
-            console.log(JSON.stringify(res));
+            console.log(JSON.stringify(res[0].stock_quantity));
             connection.end(); 
         });
       }
