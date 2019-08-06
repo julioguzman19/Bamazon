@@ -18,31 +18,22 @@ connection.connect(function (err) {
 
 var table = new Table({
     head: ['item_id', 'product_name','department_name','price','stock_quantity']
-  , colWidths: [100, 100]
+  , colWidths: [20,20,20,20,20]
 });
-table.push(
-    ['', 'Second value']
-  , ['First value', 'Second value']
-);
-console.log(table.toString());
 
-let headers = ['item_id', 'product_name','department_name','price','stock_quantity']
 
 function displayProducts() {
     
-    connection.query("SELECT item_id FROM products", function (err, res) {
+    connection.query("SELECT * FROM products", function (err, res) {
         if (err) throw err;
         for(let i=0;i<10;i++){
-            console.log(res[i].item_id);
+            table.push(
+                [res[i].item_id, res[i].product_name,res[i].department_name,res[i].price,res[i].stock_quantity]
+            ); 
         }
+        console.log(table.toString());
     });
 
-    connection.query("SELECT product_name FROM products", function (err, res) {
-        if (err) throw err;
-        
-        console.log(res);
-        askUser();
-    });
 
 
 }
