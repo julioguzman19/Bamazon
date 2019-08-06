@@ -43,7 +43,7 @@ function displayProducts() {
 function askUser() {
     inquirer.prompt([
         {
-            message: "Enter product ID you are interested in purchasing:",
+            message: "Enter item ID you are interested in purchasing:",
             name: "userID",
             validate: function (value) {
                 if (isNaN(value) === false) {
@@ -78,7 +78,7 @@ function askUser() {
                     let currentStock = parseInt(JSON.stringify(res[0].stock_quantity));
 
                     if (userInputUnits > currentStock) {
-                        console.log("We are out of inventory! Come back another day! Currently only have: " + currentStock + " " + "units");
+                        console.log("We don't have that investory quantity! Come back another day! Currently only have: " + currentStock + " " + "units");
                         connection.end();
                     }
                     else {
