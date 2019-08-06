@@ -86,7 +86,7 @@ function askUser() {
                             
                             connection.query("SELECT price FROM products WHERE item_id = " + userInputID, function (err, res) {
                                 let price = parseInt(JSON.stringify(res[0].price));
-                                console.log("Total cost is: " + userInputUnits * price);
+                                console.log("Total cost is: $" + userInputUnits * price);
                                 connection.end();
                             })
                         })
