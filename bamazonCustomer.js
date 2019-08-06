@@ -21,7 +21,7 @@ connection.connect(function (err) {
 /*Initializing Table to display products*/
 var table = new Table({
     head: ['item_id', 'product_name','department_name','price','stock_quantity']
-  , colWidths: [10,20,20,10,10]
+  , colWidths: [10,20,20,10,18]
 });
 
 /*Displaying products by looping through each row in database*/
