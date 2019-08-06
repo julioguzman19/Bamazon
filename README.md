@@ -12,6 +12,9 @@
 - App will confirm if inputted units doesn't surpass current item inventory
 - App will calculate total price and reduce inventory
 
+## App Demo:
+- https://drive.google.com/file/d/1UGQKT9zEWATIyrW8KfXCnj1GPVa-yl2l/view
+
 ## Built With:
 - MySQL 
 - Javascript
