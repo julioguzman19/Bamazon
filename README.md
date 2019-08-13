@@ -13,7 +13,13 @@
 - App will calculate total price and reduce inventory
 
 ## App Demo:
-- https://drive.google.com/file/d/1UGQKT9zEWATIyrW8KfXCnj1GPVa-yl2l/view
+- Via Google Drive: https://drive.google.com/file/d/1UGQKT9zEWATIyrW8KfXCnj1GPVa-yl2l/view
+- Via MP4 Video: https://github.com/julioguzman19/Bamazon/blob/master/App%20Demo%20Customer.mp4 
+- Demo Images: 
+![alt text](https://github.com/julioguzman19/Bamazon/blob/master/images/bamazonCustomer-node%201.PNG)
+![alt text](https://github.com/julioguzman19/Bamazon/blob/master/images/bamazonCustomer-node%202.PNG)
+![alt text](https://github.com/julioguzman19/Bamazon/blob/master/images/bamazonCustomer-node%203.PNG)
+
 
 ## Built With:
 - MySQL 
